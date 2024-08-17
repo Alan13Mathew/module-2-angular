@@ -1,0 +1,22 @@
+<h1>STORAGE SERVICE</h1>
+<input type="text" [(ngModel)]="value"><br>
+<span>CLICK THE BUTTON TO SET  ( {{value}} ) TO LOCAL STORAGE </span><button (click)="setStorage()">SET LOCAL STORGAE</button><br>
+<span>CLICK THE BUTTON TO GET FROM LOCAL STORAGE </span><button (click)="getStorage()">GET LOCAL STORGAE</button><br>
+<span>CLEAR LOCAL STORAGE </span><button (click)="clearStorage()">CLEAR LOCAL STORGAE</button>
+
+<div class="display-local-storage">
+    values : <b>{{display}}</b>
+    <table>
+        <tr>
+            <td>key</td>
+            <td>values</td>
+        </tr>
+        @for(each of display; track each; let i=$index){
+            <tr>
+                <td>{{i+1}}</td>
+                <td>{{each}}</td>
+            </tr>
+        }
+    </table>
+   
+</div>

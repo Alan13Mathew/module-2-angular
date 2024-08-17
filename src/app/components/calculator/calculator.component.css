@@ -1,0 +1,14 @@
+.each-operations{
+    margin: 10px;
+}
+div{
+    margin: 3px;
+    border: 1px solid blue;
+    padding: 5px;
+}
+:host {
+    display: block;
+    width: 100%;
+    height: 100vh;
+  }
+  

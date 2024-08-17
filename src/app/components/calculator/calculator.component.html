@@ -1,0 +1,46 @@
+<h1>CALCULATOR SERVICE</h1>
+<ol>
+  <li>ADDITION</li>
+  <li>SUBTRACT</li>
+  <li>DIVISION</li>
+  <li>MULTIPLY</li>
+</ol>
+<div class="operations">
+  <div class="each-operations">
+    NUM1:<input type="number" [(ngModel)]="num1">
+  </div>
+  <div class="each-operations">
+    NUM2:<input type="number" [(ngModel)]="num2">
+  </div>
+  <div class="each-operations">
+    select an option: <select [(ngModel)]="optionSelected">
+      <option value="1" >1. ADD</option>
+      <option value="2" >2. SUB</option>
+      <option value="3">3. DIVISION</option>
+      <option value="4">4. MULTIPLY</option>
+    </select>
+  </div>
+  <div class="submission">
+    <button (click)="performOperation()">SUBMIT</button>
+  </div>
+  @if(sum !== null ){
+  <div class="addition-result">
+    SUM = {{sum}}
+  </div>
+  }
+  @if(diff != null){
+  <div class="subtraction-result">
+    DIFFERENCE = {{diff}}
+  </div>
+  }
+  @if(quotient != null){
+  <div class="division-result">
+      QUOTIENT = {{quotient}}
+  </div>
+  }
+  @if(product != null){
+  <div class="multiply-result">
+    PRODUCT = {{product}}
+  </div>
+  }
+</div>
