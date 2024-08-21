@@ -7,20 +7,21 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-todo-app',
   standalone: true,
-  imports: [MatCardModule,MatCheckboxModule,MatSnackBarModule,MatButtonModule,FormsModule,CommonModule],
+  imports: [MatCardModule,RouterOutlet,MatCheckboxModule,MatSnackBarModule,MatButtonModule,FormsModule,CommonModule],
   templateUrl: './todo-app.component.html',
   styleUrl: './todo-app.component.css'
 })
 export class TodoAppComponent implements OnInit {
 
-constructor(private snackbar: MatSnackBar , private todoDataService: TodoService){}
+constructor(private route: Router,private snackbar: MatSnackBar , private todoDataService: TodoService){}
 
  todos!: TodoItems[];
-
+ activeTab: string = 'incomplete';
  addTodoData: TodoItems={
   todoName: '',
   todoDesc: '',
@@ -29,9 +30,14 @@ constructor(private snackbar: MatSnackBar , private todoDataService: TodoService
  incompleteTasks!: TodoItems[];
   completedTasks!: TodoItems[];
   switchContent: boolean = false;
- 
+  showStatistics: boolean = true;
  ngOnInit(): void {
   this.displayTodo();
+    }
+    showStat(){
+      this.showStatistics = !this.showStatistics;
+      this.route.navigate(['todo/dashboard']);
+      
     }
 
     clearForm(){
@@ -77,8 +83,7 @@ constructor(private snackbar: MatSnackBar , private todoDataService: TodoService
       });
     }
 
-
-    tabSelect(){
-      console.log(this.switchContent);
+    tabSelect(tab: string) {
+      this.activeTab = tab;
     }
 }

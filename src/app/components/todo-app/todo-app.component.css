@@ -36,16 +36,30 @@ input{
     background-color: #e0ffe0; /* Light green background for completed tasks */
   }
 
-  .content-switcher-tab{
-    background-color: black;
-    color: antiquewhite;
-    display: flex;
-    flex-direction: column;
-  }
-.task-switcher{
+
+  .task-switcher {
+    padding: 10px;
+    margin: 5px 0px;
     cursor: pointer;
-    border: 1px solid blue;
     text-align: center;
+    width: 200px;
+    background-color: #ececec;
+  }
+  
+  .task-switcher.active {
+    background-color: #1e6cc4;
+    color: whitesmoke;
+  }
+  
+  .task-switcher:hover {
+    background-color: #4c7eb7;
+  }
+  
+  .content-switcher-tab {
     display: flex;
-    flex-direction: column;
-}
+    justify-content: center;
+    margin-bottom: 15px;
+    background-color: grey;
+    border-radius: 20px;
+  }
+  
