@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CalculatorComponent } from './components/calculator/calculator.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { StorageComponent } from './components/storage/storage.component';
+import { TodoAppComponent } from './components/todo-app/todo-app.component';
 
 export const routes: Routes = [
     {
@@ -20,5 +21,9 @@ export const routes: Routes = [
     {
         path: 'calculator',
         component: CalculatorComponent
+    },
+    {
+        path: 'todo',
+        component: TodoAppComponent
     },
 ];

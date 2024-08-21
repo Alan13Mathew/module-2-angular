@@ -1,0 +1,48 @@
+<mat-card appearance="outlined">
+    <mat-card-content>
+        #todo name
+        <input type="text" [(ngModel)]="addTodoData.todoName">
+        #todo Description
+        <input type="text" [(ngModel)]="addTodoData.todoDesc">
+        <div id="add-button">  
+          #Due Date
+          <input type="date" [(ngModel)]="addTodoData.dueDate">
+          <mat-checkbox color="warn" [(ngModel)]="addTodoData.daily">#Daily</mat-checkbox>
+          <button mat-raised-button (click)="addTodo()">ADD</button>
+        </div>
+    </mat-card-content>
+</mat-card>
+
+<div class="content-switcher-tab">
+  <div class="task-switcher" (click)="tabSelect()">Incompleted Tasks</div>
+  <div class="task-switcher" (click)="tabSelect()">Completed Tasks</div>
+</div>
+
+
+ <h4>Incompleted Tasks</h4>
+  @for (item of incompleteTasks; track item.id) {
+    <mat-card appearance="outlined" class="task-card">
+        <mat-card-title>
+            <b>{{item.todoName | uppercase}}</b>
+            <input type="checkbox" id="checkbox" [(ngModel)]="item.completed" (change)="updateTask(item)">
+        </mat-card-title>
+        <mat-card-content>
+            <p>{{item.todoDesc}}</p>
+      <button mat-raised-button color="warn" (click)="deleteTodo(item.id)">Delete</button>
+        </mat-card-content>
+    </mat-card>
+  }
+
+  <h4>Completed Tasks</h4>
+  @for (item of completedTasks; track item.id) {
+    <mat-card appearance="outlined" class="task-card completed">
+        <mat-card-title>
+            <b>{{item.todoName | uppercase}}</b>
+            <input type="checkbox" id="checkbox" [(ngModel)]="item.completed" (change)="updateTask(item)">
+        </mat-card-title>
+        <mat-card-content>
+            <p>{{item.todoDesc}}</p>
+      <button mat-raised-button color="warn" (click)="deleteTodo(item.id)">Delete</button>
+        </mat-card-content>
+    </mat-card>
+  }

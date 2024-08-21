@@ -1,0 +1,51 @@
+mat-card{
+    margin: 10px;
+}
+h4{
+    text-align: center;
+    background-color: rgb(0, 0, 0);
+    color: rgb(254, 255, 255);
+    border-radius: 10px;
+    letter-spacing: normal;
+}
+
+mat-card-title{
+    margin: 5px;
+    color: rgb(105, 90, 178);
+    #checkbox{
+        float: right;
+        width: 40px;
+    }
+    
+}
+input{
+    height: 30px;
+}
+#add-button{
+    margin: 5px 30vw; 
+    button{
+        width: 200px;
+
+    }
+}
+.task-card {
+    margin-bottom: 15px;
+  }
+  
+  .completed {
+    background-color: #e0ffe0; /* Light green background for completed tasks */
+  }
+
+  .content-switcher-tab{
+    background-color: black;
+    color: antiquewhite;
+    display: flex;
+    flex-direction: column;
+  }
+.task-switcher{
+    cursor: pointer;
+    border: 1px solid blue;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
