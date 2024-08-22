@@ -62,4 +62,29 @@ input{
     background-color: grey;
     border-radius: 20px;
   }
+  .dashboard {
+    padding: 20px;
+     
+  .stat-container {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .stat-card {
+    flex: 1;
+    margin: 10px;
+    text-align: center;
+  }
+  
+  mat-card-title {
+    font-size: 1.2em;
+  }
+  
+  mat-card-subtitle {
+    margin-top: 5px;
+    font-size: 2em;
+    font-weight: bold;
+   }
+  }
+ 
   

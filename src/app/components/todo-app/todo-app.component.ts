@@ -29,15 +29,24 @@ constructor(private route: Router,private snackbar: MatSnackBar , private todoDa
  };
  incompleteTasks!: TodoItems[];
   completedTasks!: TodoItems[];
+
   switchContent: boolean = false;
   showStatistics: boolean = true;
+
+  
+  totalTasks: number = 0;
+  completedTasksCount: number = 0;
+  pendingTasksCount: number = 0;
+ 
+
+
  ngOnInit(): void {
   this.displayTodo();
+  this.loadStatistics();
     }
+
     showStat(){
       this.showStatistics = !this.showStatistics;
-      this.route.navigate(['todo/dashboard']);
-      
     }
 
     clearForm(){
@@ -69,6 +78,7 @@ constructor(private route: Router,private snackbar: MatSnackBar , private todoDa
     updateTask(task: TodoItems) {
       this.todoDataService.updateTodo(task.id,task).subscribe(() => {
         this.filterTasks();
+        this.loadStatistics();
       });
     }
     filterTasks() {
@@ -80,6 +90,14 @@ constructor(private route: Router,private snackbar: MatSnackBar , private todoDa
     deleteTodo(id:TodoItems["id"]){
       this.todoDataService.deleteTodo(id).subscribe(()=>{
         this.displayTodo();
+      });
+    }
+
+    loadStatistics(): void {
+      this.todoDataService.getTodo().subscribe(todos => {
+        this.totalTasks = todos.length;
+        this.completedTasksCount = todos.filter(todo => todo.completed).length;
+        this.pendingTasksCount = this.totalTasks - this.completedTasksCount;
       });
     }
 

@@ -1,8 +1,30 @@
 <br><br>
-<button (click)="showStat()">Double click to Show Statistics</button>
+<button (click)="showStat()">Show Statistics</button>
 
 @if(showStatistics){
-  <router-outlet></router-outlet>
+  <div class="dashboard">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Task Statistics</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="stat-container">
+          <mat-card class="stat-card">
+            <mat-card-title>Total Tasks</mat-card-title>
+            <mat-card-subtitle>{{ totalTasks }}</mat-card-subtitle>
+          </mat-card>
+          <mat-card class="stat-card">
+            <mat-card-title>Completed Tasks</mat-card-title>
+            <mat-card-subtitle>{{ completedTasksCount }}</mat-card-subtitle>
+          </mat-card>
+          <mat-card class="stat-card">
+            <mat-card-title>Pending Tasks</mat-card-title>
+            <mat-card-subtitle>{{ pendingTasksCount }}</mat-card-subtitle>
+          </mat-card>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 }
 
 <mat-card appearance="outlined">
