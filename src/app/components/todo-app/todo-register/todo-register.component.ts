@@ -49,7 +49,8 @@ export class TodoRegisterComponent implements OnInit{
       const confirmPassword = control.get('confirmPassword');
 
       if(password && confirmPassword && password.value !== confirmPassword.value) {
-        return {mismatch:true};
+        control.get('confirmPassword')?.setErrors({ mismatch: true });
+      return { mismatch: true };
      }
     return null;
   }
