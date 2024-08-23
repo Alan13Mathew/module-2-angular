@@ -3,6 +3,7 @@ import { CalculatorComponent } from './components/calculator/calculator.componen
 import { TasksComponent } from './components/tasks/tasks.component';
 import { StorageComponent } from './components/storage/storage.component';
 import { TodoAppComponent } from './components/todo-app/todo-app.component';
+import { TodoLoginComponent } from './components/todo-app/todo-login/todo-login.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
     {
         path: 'todo',
         component: TodoAppComponent,
+    },
+    {
+        path: 'todo-login',
+        component: TodoLoginComponent,
     },
 ];

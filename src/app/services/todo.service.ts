@@ -1,14 +1,15 @@
 
 import { Injectable } from '@angular/core';
-
 import { TodoItems } from '../interfaces/todo-items';
+import { User } from '../interfaces/user';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
- todoBaseUrl = 'http://localhost:3000/todo';
+ private todoBaseUrl = 'http://localhost:3000/todo';
+ private todoLoginUrl = 'http://localhost:3000/todoUsers';
   constructor(private http: HttpClient) { }
 
  getTodo() {
@@ -23,4 +24,10 @@ export class TodoService {
   updateTodo(id: TodoItems['id'],data:TodoItems){
     return this.http.put(`${this.todoBaseUrl}/${id}`, data);
   }
+
+  getTodoUsers(){
+    return this.http.get<User[]>(this.todoLoginUrl)
+  }
+
+
 }

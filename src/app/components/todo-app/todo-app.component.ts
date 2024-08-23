@@ -8,17 +8,26 @@ import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { Router, RouterOutlet } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-todo-app',
   standalone: true,
-  imports: [MatCardModule,RouterOutlet,MatCheckboxModule,MatSnackBarModule,MatButtonModule,FormsModule,CommonModule],
+  imports: [MatCardModule,
+    MatFormFieldModule,MatInputModule
+    ,RouterOutlet,MatCheckboxModule,
+    MatSnackBarModule,MatButtonModule,
+    FormsModule,
+    CommonModule],
   templateUrl: './todo-app.component.html',
   styleUrl: './todo-app.component.css'
 })
-export class TodoAppComponent implements OnInit {
 
-constructor(private route: Router,private snackbar: MatSnackBar , private todoDataService: TodoService){}
+export class TodoAppComponent implements OnInit {
+constructor(private route: Router
+  ,private snackbar: MatSnackBar 
+  , private todoDataService: TodoService){}
 
  todos!: TodoItems[];
  activeTab: string = 'incomplete';
@@ -103,5 +112,13 @@ constructor(private route: Router,private snackbar: MatSnackBar , private todoDa
 
     tabSelect(tab: string) {
       this.activeTab = tab;
+    }
+    logOut(){
+      this.route.navigate(['/todo-login']);
+      this.snackbar.open('logged out sucessful','close',{
+        duration: 1500,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+      })
     }
 }

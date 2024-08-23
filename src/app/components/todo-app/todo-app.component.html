@@ -1,11 +1,11 @@
 <br><br>
 <button (click)="showStat()">Show Statistics</button>
-
+<button (click)="logOut()" id="log-out-btn">logOut</button>
 @if(showStatistics){
   <div class="dashboard">
-    <mat-card>
+    <mat-card >
       <mat-card-header>
-        <mat-card-title>Task Statistics</mat-card-title>
+        <mat-card-title><b>Task Statistics</b></mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div class="stat-container">
@@ -27,7 +27,7 @@
   </div>
 }
 
-<mat-card appearance="outlined">
+<!-- <mat-card appearance="outlined">
     <mat-card-content>
         #todo name
         <input type="text" [(ngModel)]="addTodoData.todoName">
@@ -40,7 +40,7 @@
           <button mat-raised-button (click)="addTodo()">ADD</button>
         </div>
     </mat-card-content>
-</mat-card>
+</mat-card> -->
 
 <div class="content-switcher-tab">
   <div 
@@ -65,7 +65,12 @@
                   <b>{{item.todoName | uppercase}}</b>
                   <input type="checkbox" id="checkbox" [(ngModel)]="item.completed" (change)="updateTask(item)">
               </mat-card-title>
+              <mat-card-subtitle>DUE DATE: {{item.dueDate | date:'shortDate'}}</mat-card-subtitle>
+             
               <mat-card-content>
+                @if(item.daily){
+                  <p id="recurring">Daily</p>
+                }
                   <p>{{item.todoDesc}}</p>
             <button mat-raised-button color="warn" (click)="deleteTodo(item.id)">Delete</button>
               </mat-card-content>
@@ -85,6 +90,7 @@
                   <b>{{item.todoName | uppercase}}</b>
                   <input type="checkbox" id="checkbox" [(ngModel)]="item.completed" (change)="updateTask(item)">
               </mat-card-title>
+              <mat-card-subtitle>DUE DATE: {{item.dueDate | date:'shortDate'}}</mat-card-subtitle>
               <mat-card-content>
                   <p>{{item.todoDesc}}</p>
             <button mat-raised-button color="warn" (click)="deleteTodo(item.id)">Delete</button>
@@ -99,6 +105,32 @@
 
 
 
+<mat-card appearance="outlined" class="todo-card">
+  <mat-card-header>
+    <mat-card-title class="card-title">Add New Task</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="form-container">
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Todo Name</mat-label>
+        <input matInput type="text" [(ngModel)]="addTodoData.todoName">
+      </mat-form-field>
 
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Todo Description</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="addTodoData.todoDesc"></textarea>
+      </mat-form-field>
 
-  
+      <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Due Date</mat-label>
+        <input matInput type="date" [(ngModel)]="addTodoData.dueDate">
+      </mat-form-field>
+
+      <mat-checkbox color="primary" [(ngModel)]="addTodoData.daily">Daily</mat-checkbox>
+
+      <div class="button-container">
+        <button mat-raised-button color="accent" (click)="addTodo()">ADD</button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
