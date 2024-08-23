@@ -40,7 +40,9 @@ export class TodoLoginComponent {
     password: ['',[Validators.required]]
    });
   }
- 
+  displayRegistration(){
+    this.route.navigate(['/register']);
+  }
   authUser(){
     this.todoService.getTodoUsers().subscribe((response: User[])=>{
       const user = response.find(each=> each.email === this.loginForm.value.email && each.password === this.loginForm.value.password);
