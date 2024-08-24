@@ -5,7 +5,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { User } from '../../../interfaces/user';
+import { Router } from '@angular/router';
+import { TodoService } from '../../../services/todo.service';
 
 @Component({
   selector: 'app-todo-register',
@@ -24,8 +25,9 @@ export class TodoRegisterComponent implements OnInit{
  registrationForm!: FormGroup;
 
   constructor(
+    private route: Router,
+    private userService: TodoService,
     private fb: FormBuilder,
-    // private userService: User,
     private snackbar: MatSnackBar
   ){}
 
@@ -52,12 +54,33 @@ export class TodoRegisterComponent implements OnInit{
         control.get('confirmPassword')?.setErrors({ mismatch: true });
       return { mismatch: true };
      }
-    return null;
-  }
+      return null;
+    }
  }
 
  registerUser(){
-
- }
+    const newUser = this.registrationForm.value;
+    this.userService.getTodoUsers().subscribe(allUsers => {
+      const userExists = allUsers.some(user=> user.email === newUser.email);
+      if(userExists){
+        this.snackbar.open('User Already Exists!','close',{
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center'
+        });
+        this.registrationForm.reset();
+      }
+      else{
+        this.userService.addTodoUsers(newUser).subscribe(()=>{
+          this.snackbar.open('Registration successfull!','close',{
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center'
+          });
+          this.route.navigate(['/todo-login']);
+        });
+      }
+    });
+  }
 
 }

@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class TodoService {
  private todoBaseUrl = 'http://localhost:3000/todo';
- private todoLoginUrl = 'http://localhost:3000/todoUsers';
+ private todoUsersUrl = 'http://localhost:3000/todoUsers';
   constructor(private http: HttpClient) { }
 
  getTodo() {
@@ -26,7 +26,11 @@ export class TodoService {
   }
 
   getTodoUsers(){
-    return this.http.get<User[]>(this.todoLoginUrl)
+    return this.http.get<User[]>(this.todoUsersUrl)
+  }
+
+  addTodoUsers(user: User){
+    return this.http.post<User>(this.todoUsersUrl, user)
   }
 
 
