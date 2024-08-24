@@ -7,20 +7,30 @@ import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Router, RouterOutlet } from '@angular/router';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-todo-app',
   standalone: true,
-  imports: [MatCardModule,MatCheckboxModule,MatSnackBarModule,MatButtonModule,FormsModule,CommonModule],
+  imports: [MatCardModule,
+    MatFormFieldModule,MatInputModule
+    ,RouterOutlet,MatCheckboxModule,
+    MatSnackBarModule,MatButtonModule,
+    FormsModule,
+    CommonModule],
   templateUrl: './todo-app.component.html',
   styleUrl: './todo-app.component.css'
 })
-export class TodoAppComponent implements OnInit {
 
-constructor(private snackbar: MatSnackBar , private todoDataService: TodoService){}
+export class TodoAppComponent implements OnInit {
+constructor(private route: Router
+  ,private snackbar: MatSnackBar 
+  , private todoDataService: TodoService){}
 
  todos!: TodoItems[];
-
+ activeTab: string = 'incomplete';
  addTodoData: TodoItems={
   todoName: '',
   todoDesc: '',
@@ -28,10 +38,24 @@ constructor(private snackbar: MatSnackBar , private todoDataService: TodoService
  };
  incompleteTasks!: TodoItems[];
   completedTasks!: TodoItems[];
+
   switchContent: boolean = false;
+  showStatistics: boolean = true;
+
+  
+  totalTasks: number = 0;
+  completedTasksCount: number = 0;
+  pendingTasksCount: number = 0;
  
+
+
  ngOnInit(): void {
   this.displayTodo();
+  this.loadStatistics();
+    }
+
+    showStat(){
+      this.showStatistics = !this.showStatistics;
     }
 
     clearForm(){
@@ -63,6 +87,7 @@ constructor(private snackbar: MatSnackBar , private todoDataService: TodoService
     updateTask(task: TodoItems) {
       this.todoDataService.updateTodo(task.id,task).subscribe(() => {
         this.filterTasks();
+        this.loadStatistics();
       });
     }
     filterTasks() {
@@ -77,8 +102,23 @@ constructor(private snackbar: MatSnackBar , private todoDataService: TodoService
       });
     }
 
+    loadStatistics(): void {
+      this.todoDataService.getTodo().subscribe(todos => {
+        this.totalTasks = todos.length;
+        this.completedTasksCount = todos.filter(todo => todo.completed).length;
+        this.pendingTasksCount = this.totalTasks - this.completedTasksCount;
+      });
+    }
 
-    tabSelect(){
-      console.log(this.switchContent);
+    tabSelect(tab: string) {
+      this.activeTab = tab;
+    }
+    logOut(){
+      this.route.navigate(['/todo-login']);
+      this.snackbar.open('logged out sucessful','close',{
+        duration: 1500,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+      })
     }
 }
