@@ -5,6 +5,7 @@ import { StorageComponent } from './components/storage/storage.component';
 import { TodoAppComponent } from './components/todo-app/todo-app.component';
 import { TodoLoginComponent } from './components/todo-app/todo-login/todo-login.component';
 import { TodoRegisterComponent } from './components/todo-app/todo-register/todo-register.component';
+import { ProductsMod3Task2Component } from './components/products-mod3-task2/products-mod3-task2.component';
 
 export const routes: Routes = [
     {
@@ -35,5 +36,9 @@ export const routes: Routes = [
     {
         path: 'register',
         component: TodoRegisterComponent,
+    },
+    {
+        path: 'products',
+        component: ProductsMod3Task2Component,
     },
 ];
