@@ -1,0 +1,59 @@
+  <button (click)="showQuestion()">Show/Hide question</button>
+  @if(showQuestionVar === true){
+    <ul>
+        <li> Task 1- Implement client-side pagination for displaying multiple products or bakery
+            items.</li>
+            <li>Task 2- Dynamically calculate and display the number of pages based on the total
+                number of items.</li>
+                <li>Task 3- Enable or disable the next and previous buttons based on the current page.</li>
+                <li>Task 4- Highlight and display the current page number in the pagination component.</li>
+                <li>Task 5- Generate random items using Mockaroo, export them as a JSON file, and use this data in the application.</li>
+                <li>Task 6- Allow users to select the number of items displayed per page (e.g., 10, 20, 50).</li>
+                <li>Task 7- Display the total number of items and the range of items currently being displayed (e.g., "Showing 1-10 of 100 items").</li>
+                <li>Task 8- Implement a "Go to Page" input field to allow users to jump to a specific page directly. </li>
+                <li>Task 9- Add a "First" and "Last" button to quickly navigate to the first and last pages.</li>
+                <li>Task 10- Ensure the pagination component is responsive and works well on various screen sizes and devices.</li>
+    </ul>
+  }
+  <mat-card>
+    <mat-card-content>   
+      <label for="itemsPerTable">No of items to display in Table </label>
+      <input id="itemsPerTable" type="number" [(ngModel)]="productsPerTable">
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="warn" type="submit" (click)="onItemsPerTableChange()">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+ 
+    <div class="paginator">
+      <button  class="previous-page" [disabled]="pageNumber<=1" (click)="previousPage()">
+        <=
+      </button>
+      @for(page of totalPagesArray; track page){
+        <button class="adjacent-pages" [ngClass]="{ 'current-page': page===pageNumber }" (click)="currentPage(page)">{{page}}</button>
+      }
+      <button class="next-page" [disabled]="pageNumber>=totalPages" (click)="nextPage()">
+        =>
+      </button>
+    </div>
+    <div class="item-summary">
+      {{PaginatorRange}}
+    </div>
+ <table>
+  <tr>
+    <th>No.</th>
+    <th>Product Name</th>
+    <th>Product Description</th>
+    <th>EXP</th>
+    <th>Price</th>
+  </tr>
+  @for(product of productsToDisplay; track product.id; let i=$index){
+    <tr>
+      <td>{{product.id}}</td>
+      <td>{{product.Pname}}</td>
+      <td>{{product.Pdesc}}</td>
+      <td>{{product.exp}}</td>
+      <td>{{product.price}}</td>
+    </tr>
+  }
+ </table>
