@@ -1,0 +1,15 @@
+input.ng-touched.ng-invalid {
+    border-color: red;
+  }
+  
+  small {
+    color: red;
+  }
+  
+
+ mat-card, mat-form-field{
+    margin: 5px;
+  }
+  mat-card-title{
+    margin-left: 10px;
+  }

@@ -1,0 +1,97 @@
+<mat-card>
+  <mat-card-title><h2>Angular Reactive Forms</h2></mat-card-title>
+  <mat-card-content>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+        <mat-error *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+          <small *ngIf="userForm.get('name')?.errors?.required">Name is required.</small>
+          <small *ngIf="userForm.get('name')?.errors?.minlength">
+            Name must be at least 3 characters long.
+          </small>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Age</mat-label>
+        <input matInput type="number" formControlName="age" />
+        <mat-error *ngIf="userForm.get('age')?.invalid && userForm.get('age')?.touched">
+          <small *ngIf="userForm.get('age')?.errors?.required">Age is required.</small>
+          <small *ngIf="userForm.get('age')?.errors?.min">Age must be at least 18.</small>
+          <small *ngIf="userForm.get('age')?.errors?.max">Age must be less than 100.</small>
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" formControlName="email" />
+        <mat-error *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+          <small *ngIf="userForm.get('email')?.errors?.required">Email is required.</small>
+          <small *ngIf="userForm.get('email')?.errors?.email">Invalid email format.</small>
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Phone</mat-label>
+        <input matInput type="tel" formControlName="phone" />
+        <mat-error *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched">
+          <small *ngIf="userForm.get('phone')?.errors?.required">Phone number is required.</small>
+          <small *ngIf="userForm.get('phone')?.errors?.pattern">Phone number must be 10 digits.</small>
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        <mat-error *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+          <small *ngIf="userForm.get('password')?.errors?.required">Password is required.</small>
+          <small *ngIf="userForm.get('password')?.errors?.minlength">
+            Password must be at least 8 characters long.
+          </small>
+          <small *ngIf="userForm.get('password')?.errors?.pattern">
+            Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+          </small>
+        </mat-error>
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+        <mat-label>Confirm Password</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" />
+        <mat-error *ngIf="userForm.get('confirmPassword')?.invalid && userForm.get('confirmPassword')?.touched">
+          <small *ngIf="userForm.get('confirmPassword')?.errors?.required">Confirm Password is required.</small>
+          <small *ngIf="userForm.errors?.mismatch">Passwords do not match.</small>
+        </mat-error>
+      </mat-form-field>
+    
+      <div *ngIf="userForm.invalid && (userForm.dirty || userForm.touched)">
+        <div *ngIf="userForm.errors?.mismatch">
+          <strong>Error: </strong>Passwords do not match.
+        </div>
+        <div *ngIf="userForm.get('name')?.errors || userForm.get('age')?.errors || userForm.get('email')?.errors || userForm.get('phone')?.errors || userForm.get('password')?.errors">
+          <strong>Summary:</strong>
+          <ul>
+            <li *ngIf="userForm.get('name')?.errors?.required">Name is required.</li>
+            <li *ngIf="userForm.get('name')?.errors?.minlength">Name must be at least 3 characters long.</li>
+            <li *ngIf="userForm.get('age')?.errors?.required">Age is required.</li>
+            <li *ngIf="userForm.get('age')?.errors?.min">Age must be at least 18.</li>
+            <li *ngIf="userForm.get('age')?.errors?.max">Age must be less than 100.</li>
+            <li *ngIf="userForm.get('email')?.errors?.required">Email is required.</li>
+            <li *ngIf="userForm.get('email')?.errors?.email">Invalid email format.</li>
+            <li *ngIf="userForm.get('phone')?.errors?.required">Phone number is required.</li>
+            <li *ngIf="userForm.get('phone')?.errors?.pattern">Phone number must be 10 digits.</li>
+            <li *ngIf="userForm.get('password')?.errors?.required">Password is required.</li>
+            <li *ngIf="userForm.get('password')?.errors?.minlength">Password must be at least 8 characters long.</li>
+            <li *ngIf="userForm.get('password')?.errors?.pattern">
+              Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.
+            </li>
+          </ul>
+        </div>
+      </div>
+    <br>
+    </form>
+    
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Submit</button>
+  </mat-card-actions>
+</mat-card>
