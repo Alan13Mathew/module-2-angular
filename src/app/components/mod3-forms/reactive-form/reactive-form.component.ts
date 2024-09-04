@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-reactive-form',
@@ -14,7 +15,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     ReactiveFormsModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatSnackBarModule
   ],
   templateUrl: './reactive-form.component.html',
   styleUrl: './reactive-form.component.css'
@@ -22,7 +24,7 @@ import { MatInputModule } from '@angular/material/input';
 export class ReactiveFormComponent {
   userForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private snackbar: MatSnackBar) {
     this.userForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       age: ['', [Validators.required, Validators.min(18), Validators.max(100)]],
@@ -87,7 +89,13 @@ dynamicPasswordValidator(passwordCriteria: any): ValidatorFn {
   }
 
   onSubmit() {
+    console.log('iside');
     if (this.userForm.valid) {
+      this.snackbar.open('Form submitted','close',{
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center'
+      })
       console.log('Form Submitted!', this.userForm.value);
     }
   }

@@ -14,7 +14,9 @@ import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/route
 })
 export class Mod3FormsComponent {
     select: boolean =  false;
-  constructor(private route:ActivatedRoute,private router:Router){  }
+  constructor(private route:ActivatedRoute,private router:Router){
+    this.gotoTemplate();
+    }
 
   gotoTemplate(){
     this.select = false;

@@ -5,8 +5,8 @@
             <h2>Implementing angular template driven forms and reactive forms</h2>
         </mat-card-title>
         <mat-card-actions>
-            <button mat-raised-button (click)="gotoTemplate()">click to goto template form</button>
-            <button mat-raised-button (click)="gotoReactive()">click to goto Reactive Form</button>
+            <button mat-raised-button [disabled]="select==false" (click)="gotoTemplate()">click to goto template form</button>
+            <button mat-raised-button [disabled]="select==true" (click)="gotoReactive()">click to goto Reactive Form</button>
         </mat-card-actions>
     </mat-card>
     

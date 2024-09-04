@@ -1,7 +1,7 @@
 <mat-card>
   <mat-card-title><h2>Angular Reactive Forms</h2></mat-card-title>
   <mat-card-content>
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="userForm" >
       <mat-form-field appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput formControlName="name" />
@@ -87,11 +87,14 @@
           </ul>
         </div>
       </div>
-    <br>
+    <br> 
+
     </form>
     
   </mat-card-content>
   <mat-card-actions>
-    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">Submit</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid" (click)="onSubmit()">Submit</button>
+
   </mat-card-actions>
+  
 </mat-card>

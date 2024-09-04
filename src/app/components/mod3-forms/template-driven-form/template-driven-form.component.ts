@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -16,9 +17,14 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './template-driven-form.component.css'
 })
 export class TemplateDrivenFormComponent {
+  constructor(private snackbar:MatSnackBar){}
   onSubmit(form: any) {
     if (form.valid) {
-      alert('Form Submitted!');
+      this.snackbar.open('Form Submitted!','close',{
+        duration:2000,
+        verticalPosition:'top',
+        horizontalPosition:'center'
+      })
       console.log('Form Submitted!', form.value);
     }
   }
