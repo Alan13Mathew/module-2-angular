@@ -1,0 +1,23 @@
+<h1>Implementing angular template driven forms and reactive forms</h1>
+
+<div class="form-content">
+    <mat-card>
+        <mat-card-actions>
+            <button mat-raised-button (click)="gotoTemplate()">click to goto template form</button>
+            <button mat-raised-button (click)="gotoReactive()">click to goto Reactive Form</button>
+        </mat-card-actions>
+    </mat-card>
+    
+
+    @if(select === false){
+        <div class="template-form">
+             <router-outlet></router-outlet>
+         </div>
+    }
+    @if(select === true){
+        <div class="reactive-form">
+            <router-outlet></router-outlet>
+         </div>
+    }
+    
+</div>
